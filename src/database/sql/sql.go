@@ -2874,7 +2874,7 @@ func (rs *Rows) Scan(dest ...interface{}) error {
 		rs.closemu.RUnlock()
 		return errors.New("sql: Rows are closed")
 	}
-	rs.closemu.RUnlock()
+	defer rs.closemu.RUnlock()
 
 	if rs.lastcols == nil {
 		return errors.New("sql: Scan called without calling Next")
